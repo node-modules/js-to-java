@@ -3,7 +3,7 @@ js-to-java
 
 easy way to wrap js object to java object.
 
-in [hessian.js](/dead-horse/hessian.js), we need to write java classname with js object so make it encode as the write class.
+in [hessian.js](https://github.com/dead-horse/hessian.js), we need to write java classname with js object so make it encode as the write class.
 
 ## Install
 
