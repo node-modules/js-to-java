@@ -13,6 +13,17 @@ var combine = function (className, value) {
   };
 };
 
+/**
+ * java('com.java.Object', {})
+ * =>
+ * {
+ *   $class: 'com.java.Object',
+ *   $: {}
+ * }
+ * @param {[type]} className [description]
+ * @param {[type]} value [description]
+ * @return {[type]} [description]
+ */
 exports = module.exports = function (className, value) {
   return combine(className, value);
 };
