@@ -20,9 +20,8 @@ var combine = function (className, value) {
  *   $class: 'com.java.Object',
  *   $: {}
  * }
- * @param {[type]} className [description]
- * @param {[type]} value [description]
- * @return {[type]} [description]
+ * @param {String} className
+ * @param {Mixed} value
  */
 exports = module.exports = function (className, value) {
   return combine(className, value);
