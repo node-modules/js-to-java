@@ -71,6 +71,7 @@ var simpleTypeMap = exports.simpleTypeMap = {
  *   $: true
  * }
  */
+
 for (var key in simpleTypeMap) {
   (function (key) {
     exports[key] = function (val) {
@@ -90,6 +91,7 @@ for (var key in simpleTypeMap) {
  * @param {String} className class name in array
  * @param {Array} val
  */
+
 exports.array = function (className, val) {
   className = simpleTypeMap[className] || className;
   return combine('[' + className, val);
@@ -103,6 +105,7 @@ exports.array = function (className, val) {
  *   $: [true, false]
  * }
  */
+
 for (var key in simpleTypeMap) {
   (function (key) {
     exports.array[key] = function (val) {
@@ -111,3 +114,16 @@ for (var key in simpleTypeMap) {
   })(key);
 }
 
+/**
+ * java abstract class
+ * @param {String} abstractClassName
+ * @param {String} className
+ * @param {Object} val
+ * @return {Object}
+ */
+
+exports.abstract = function (abstractClassName, className, val) {
+  var res = combine(className, val);
+  res.$abstractClass = abstractClassName;
+  return res;
+};

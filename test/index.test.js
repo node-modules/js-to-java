@@ -37,6 +37,14 @@ describe('js to java', function () {
     java.array.Integer([1, 2, 3]).should.eql({$class: '[java.lang.Integer', $: [1, 2, 3]});
   });
 
+  it('should abstractClass work ok', function () {
+    java.abstract('java.lang.Object', 'com.java.Object', {}).should.eql({
+      $class: 'com.java.Object',
+      $abstractClass: 'java.lang.Object',
+      $: {}
+    });
+  });
+
   it('should combine work fine', function () {
     function combine(className, value) {
       return {
