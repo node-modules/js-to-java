@@ -3,7 +3,7 @@ js-to-java
 
 easy way to wrap js object to java object.
 
-in [hessian.js](https://github.com/dead-horse/hessian.js), we need to write java classname with js object so make it encode as the write class.
+in [hessian.js](https://github.com/node-modules/hessian.js), we need to write java classname with js object so make it encode as the write class.
 
 ## Install
 
@@ -54,6 +54,12 @@ java.array.int([1, 2, 3]); // => {$class: '[int', $: [1, 2, 3]}
   HashMap: 'java.util.HashMap',
   Map: 'java.util.Map',
   Dictionary: 'java.util.Dictionary'
+```
+
+### abstract class
+
+```js
+java.abstract('AbstractClass', 'Class', {foo: 'bar'});
 ```
 
 ### Custom combineFunction
