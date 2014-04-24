@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/dead-horse/js-to-java.git"
+    "url": "git://github.com/node-modules/js-to-java.git"
   },
   "keywords": [
     "js",
@@ -20,9 +20,9 @@
   "author": "dead_horse <dead_horse@qq.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dead-horse/js-to-java/issues"
+    "url": "https://github.com/node-modules/js-to-java/issues"
   },
-  "homepage": "https://github.com/dead-horse/js-to-java",
+  "homepage": "https://github.com/node-modules/js-to-java",
   "dependencies": {
 
   },
