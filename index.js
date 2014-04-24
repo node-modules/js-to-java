@@ -1,4 +1,4 @@
-/*!
+/**!
  * js-to-java - index.js
  * Copyright(c) 2014 dead_horse <dead_horse@qq.com>
  * MIT Licensed
@@ -72,13 +72,11 @@ var simpleTypeMap = exports.simpleTypeMap = {
  * }
  */
 
-for (var key in simpleTypeMap) {
-  (function (key) {
-    exports[key] = function (val) {
-      return combine(simpleTypeMap[key], val);
-    };
-  })(key);
-}
+Object.keys(simpleTypeMap).forEach(function (key) {
+  exports[key] = function (val) {
+    return combine(simpleTypeMap[key], val);
+  };
+});
 
 /**
  * java.array('Boolean', [true, false]);
@@ -106,16 +104,15 @@ exports.array = function (className, val) {
  * }
  */
 
-for (var key in simpleTypeMap) {
-  (function (key) {
-    exports.array[key] = function (val) {
-      return combine('[' + simpleTypeMap[key], val);
-    };
-  })(key);
-}
+Object.keys(simpleTypeMap).forEach(function (key) {
+  exports.array[key] = function (val) {
+    return combine('[' + simpleTypeMap[key], val);
+  };
+});
 
 /**
  * java abstract class
+ *
  * @param {String} abstractClassName
  * @param {String} className
  * @param {Object} val
@@ -126,4 +123,18 @@ exports.abstract = function (abstractClassName, className, val) {
   var res = combine(className, val);
   res.$abstractClass = abstractClassName;
   return res;
+};
+
+/**
+ * java.enum("hessian.demo.Color", "RED");
+ * =>
+ * {
+ *   $class: 'hessian.demo.Color',
+ *   $: { name: 'RED' }
+ * }
+ */
+exports.enum = function (className, name) {
+  return combine(className, {
+    name: name
+  });
 };

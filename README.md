@@ -1,4 +1,4 @@
-js-to-java
+js-to-java [![Build Status](https://travis-ci.org/node-modules/js-to-java.svg?branch=master)](https://travis-ci.org/node-modules/js-to-java)
 ==========
 
 easy way to wrap js object to java object.
@@ -7,9 +7,12 @@ in [hessian.js](https://github.com/node-modules/hessian.js), we need to write ja
 
 ## Install
 
-```
+[![NPM](https://nodei.co/npm/js-to-java.png?downloads=true)](https://nodei.co/npm/js-to-java/)
+
+```bash
 npm install js-to-java
 ```
+
 ## Usage
 
 ### Example
@@ -17,12 +20,17 @@ npm install js-to-java
 ```js
 var java = require('js-to-java');
 
+// Java: com.java.Object o = new com.java.Object();
 java('com.java.Object', {}); // => {$class: 'com.java.Object', $: {}}
 
+// Java: Boolean r;
 java.Boolean(true); // => {$class: 'java.lang.Boolean', $: true}
 
+// Java: short[] shorts = new short[] {1, 2, 3};
 java.array('short', [1, 2, 3]); // => {$class: '[short', $: [1, 2, 3]}
 
+// Java: int[] ints = new int[] {1, 2, 3};
+java.array('int', [1, 2, 3]); // same to the next example
 java.array.int([1, 2, 3]); // => {$class: '[int', $: [1, 2, 3]}
 ```
 

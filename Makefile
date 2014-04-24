@@ -4,11 +4,11 @@ TIMEOUT = 3000
 MOCHA_OPTS =
 
 install:
-	@npm install --registry=http://registry.cnpmjs.org \
+	@npm install --registry=http://registry.npm.taobao.org \
 		--disturl=http://cnpmjs.org/dist
 
-test:
-	@NODE_ENV=test ./node_modules/mocha/bin/mocha \
+test: install
+	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--harmony-generators \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
@@ -16,8 +16,7 @@ test:
 		$(MOCHA_OPTS) \
 		$(TESTS)
 
-
-test-cov:
+test-cov cov: install
 	@NODE_ENV=test node --harmony \
 		node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha \
 		-- -u exports \
@@ -26,20 +25,13 @@ test-cov:
 		--require should \
 		$(MOCHA_OPTS) \
 		$(TESTS)
-	@-$(MAKE) check-coverage
+	-@./node_modules/.bin/cov coverage
 
-check-coverage:
-	@./node_modules/.bin/istanbul check-coverage \
-		--statements 95 \
-		--functions 95 \
-		--branches 90 \
-		--lines 95
-
-cov:
-	@./node_modules/.bin/cov coverage
-
-autod:
+autod: install
 	@./node_modules/.bin/autod -w -e example.js
 	@$(MAKE) install
+
+contributors: install
+	@./node_modules/.bin/contributors -f plain -o AUTHORS
 
 .PHONY: test

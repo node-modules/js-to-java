@@ -10,8 +10,8 @@
  * Module dependencies.
  */
 
-var java = require('../');
 var should = require('should');
+var java = require('../');
 
 describe('js to java', function () {
   it('should java wrap work fine', function () {
@@ -52,8 +52,17 @@ describe('js to java', function () {
         value: value
       };
     }
+    var _old = java.combine;
     java.combine = combine;
     java.combine.should.equal(combine);
     java('com.test.Object', {}).should.eql({className: 'com.test.Object', value: {}});
+    java.combine = _old;
+  });
+
+  it('should create enum', function () {
+    java.enum('hessian.demo.Color', 'RED').should.eql({
+      $class: 'hessian.demo.Color',
+      $: {name: 'RED'}
+    });
   });
 });
