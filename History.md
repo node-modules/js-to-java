@@ -1,4 +1,13 @@
 
+1.0.0 / 2014-04-24
+==================
+
+  * Merge pull request #1 from node-modules/enum
+  * fix github links
+  * add enum() test cases
+  * add enum() helper
+  * add abstract in readme
+
 0.0.3 / 2014-04-06
 ==================
 
