@@ -6,7 +6,6 @@
   "scripts": {
     "test": "make test"
   },
-  "files": ["index.js"],
   "repository": {
     "type": "git",
     "url": "git://github.com/dead-horse/js-to-java.git"
