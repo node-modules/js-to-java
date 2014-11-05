@@ -138,3 +138,32 @@ exports.enum = function (className, name) {
     name: name
   });
 };
+
+/**
+ * java.Class("java.lang.String");
+ * =>
+ * {
+ *   $class: 'java.lang.Class',
+ *   $: { name: 'java.lang.String' }
+ * }
+ */
+exports.Class = function (name) {
+  return combine('java.lang.Class', {
+    name: name
+  });
+};
+
+/**
+ * // for java.util.Locale
+ * java.Locale("zh_CN");
+ * =>
+ * {
+ *   $class: 'com.caucho.hessian.io.LocaleHandle',
+ *   $: { value: 'zh_CN' }
+ * }
+ */
+exports.Locale = function (locale, handle) {
+  return combine(handle || 'com.caucho.hessian.io.LocaleHandle', {
+    value: locale
+  });
+};

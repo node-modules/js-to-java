@@ -65,4 +65,26 @@ describe('js to java', function () {
       $: {name: 'RED'}
     });
   });
+
+  it('should create Class', function () {
+    java.Class('java.lang.String').should.eql({
+      $class: 'java.lang.Class',
+      $: {name: 'java.lang.String'}
+    });
+  });
+
+  it('should create Locale with out input `handle`', function () {
+    java.Locale('zh_CN').should.eql({
+      $class: 'com.caucho.hessian.io.LocaleHandle',
+      $: {value: 'zh_CN'}
+    });
+  });
+
+  it('should create Locale with input `handle`', function () {
+    java.Locale('zh_CN', 'test.com.caucho.hessian.io.LocaleHandle').should.eql({
+      $class: 'test.com.caucho.hessian.io.LocaleHandle',
+      $: {value: 'zh_CN'}
+    });
+  });
+
 });
