@@ -1,4 +1,10 @@
 
+1.1.0 / 2014-11-05 
+==================
+
+  * Merge pull request #3 from node-modules/more
+  * feat(support): add java.lang.Class & java.util.Locale
+
 1.0.0 / 2014-04-24
 ==================
 
