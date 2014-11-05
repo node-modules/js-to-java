@@ -83,5 +83,17 @@ java.combine = function (className, value) {
 java('com.test.Object', {}); // =>{className: 'com.test.Object', value: {}}
 ```
 
+### java.lang.Class
+
+```
+java.Class("java.lang.String");
+```
+
+### java.util.Locale
+
+```
+java.Locale("zh_CN", ['com.caucho.hessian.io.LocaleHandle']);
+```
+
 ## License
 MIT
