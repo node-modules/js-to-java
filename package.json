@@ -32,6 +32,6 @@
     "cov": "*",
     "istanbul": "*",
     "mocha": "*",
-    "should": "3.3.1"
+    "should": "~4.4.1"
   }
 }
