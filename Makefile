@@ -1,5 +1,5 @@
 TESTS = test/*.test.js
-REPORTER = tap
+REPORTER = spec
 TIMEOUT = 3000
 MOCHA_OPTS =
 
@@ -25,10 +25,19 @@ test-cov cov: install
 		--require should \
 		$(MOCHA_OPTS) \
 		$(TESTS)
-	-@./node_modules/.bin/cov coverage
+
+test-travis:
+		@NODE_ENV=test node --harmony \
+		node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha \
+		-- -u exports \
+		--reporter $(REPORTER) \
+		--timeout $(TIMEOUT) \
+		--require should \
+		$(MOCHA_OPTS) \
+		$(TESTS)
 
 autod: install
-	@./node_modules/.bin/autod -w -e example.js
+	@./node_modules/.bin/autod -w -e example.js --prefix "~"
 	@$(MAKE) install
 
 contributors: install
