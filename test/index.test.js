@@ -19,22 +19,48 @@ describe('js to java', function () {
   });
 
   it('should simple type map work fine', function () {
-    for (var key in java.simpleTypeMap) {
-      var val = 1;
-      java[key](val).should.eql({
-        $class: java.simpleTypeMap[key],
-        $: val
-      });
-    }
+    var val = 1;
+    java.boolean(val).should.eql({$class: 'boolean', $: true});
+    java.Boolean(val).should.eql({$class: 'java.lang.Boolean', $: true});
+    java.Integer('1').should.eql({$class: 'java.lang.Integer', $: 1});
+    java.int('1').should.eql({$class: 'int', $: 1});
+    java.short('101').should.eql({$class: 'short', $: 101});
+    java.Short('101').should.eql({$class: 'java.lang.Short', $: 101});
+    java.byte('1').should.eql({$class: 'byte', $: 1});
+    java.Byte('1').should.eql({$class: 'java.lang.Byte', $: 1});
+    java.long('1').should.eql({$class: 'long', $: '1'});
+    java.Long(1).should.eql({$class: 'java.lang.Long', $: 1});
+    java.double('1.02').should.eql({$class: 'double', $: 1.02});
+    java.Double('1').should.eql({$class: 'java.lang.Double', $: 1});
+    java.float('1').should.eql({$class: 'float', $: 1});
+    java.Float('1.03').should.eql({$class: 'java.lang.Float', $: 1.03});
+    java.String(123).should.eql({$class: 'java.lang.String', $: '123'});
+    java.char('2').should.eql({$class: 'char', $: '2'});
+    java.chars('3').should.eql({$class: 'char[]', $: '3'});
+    java.Character(1).should.eql({$class: 'java.lang.Character', $: '1'});
+    java.List([]).should.eql({$class: 'java.util.List', $: []});
+    (java.Integer() === null).should.be.true;
   });
 
   it('should array work fine', function () {
-    java.array('Short', 1).should.eql({$class: '[java.lang.Short', $: 1});
-    java.array('com.java.Object', [{}]).should.eql({$class: '[com.java.Object', $: [{}]});
+    java.array('Short', [1]).should.eql({$class: '[java.lang.Short', $: [
+      {
+        $class: 'java.lang.Short',
+        $: 1
+      }
+    ]});
+    java.array('com.java.Object', [{}]).should.eql({$class: '[com.java.Object', $: [{
+      $class: 'com.java.Object',
+      $: {}
+    }]});
   });
 
   it('should array.type work fine', function () {
-    java.array.Integer([1, 2, 3]).should.eql({$class: '[java.lang.Integer', $: [1, 2, 3]});
+    java.array.Integer(['1', '2', 3]).should.eql({$class: '[java.lang.Integer', $: [
+      { $: 1, $class: 'java.lang.Integer' },
+      { $: 2, $class: 'java.lang.Integer' },
+      { $: 3, $class: 'java.lang.Integer' }
+    ]});
   });
 
   it('should abstractClass work ok', function () {
@@ -64,6 +90,7 @@ describe('js to java', function () {
       $class: 'hessian.demo.Color',
       $: {name: 'RED'}
     });
+    (java.enum() === null).should.be.true;
   });
 
   it('should create Class', function () {
@@ -71,6 +98,7 @@ describe('js to java', function () {
       $class: 'java.lang.Class',
       $: {name: 'java.lang.String'}
     });
+    (java.Class() === null).should.be.true;
   });
 
   it('should create Locale with out input `handle`', function () {
@@ -85,6 +113,7 @@ describe('js to java', function () {
       $class: 'test.com.caucho.hessian.io.LocaleHandle',
       $: {value: 'zh_CN'}
     });
+    (java.Locale() === null).should.be.true;
   });
 
 });
