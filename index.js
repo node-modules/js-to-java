@@ -6,10 +6,30 @@
 
 'use strict';
 
-var combine = function (className, value) {
+var combine = function (type, value) {
+  if (value == null) {
+    return null;
+  }
+  if (typeof type === 'string') {
+    type = {
+      name: type,
+      valid: ignore
+    };
+  }
   return {
-    $class: className,
-    $: value
+    $class: type.name,
+    $: type.valid(value)
+  };
+};
+
+var combineArray = function (type, value) {
+  var values = [];
+  for (var i = 0, len = value.length; i < len; i++) {
+    values.push(combine(type, value[i]));
+  }
+  return {
+    $class: '[' + (type.name || type),
+    $: values
   };
 };
 
@@ -35,32 +55,41 @@ exports.__defineGetter__('combine', function () {
   return combine;
 });
 
+// valid list
+function ignore(val) {return val;}
+function bool(val) {return !!bool;}
+function integer(val) {return parseInt(val, 10)}
+// parseInt;
+// parseFloat;
+// String
+
 var simpleTypeMap = exports.simpleTypeMap = {
-  Boolean: 'java.lang.Boolean',
-  boolean: 'boolean',
-  Integer: 'java.lang.Integer',
-  int: 'int',
-  short: 'short',
-  Short: 'java.lang.Short',
-  byte: 'byte',
-  Byte: 'java.lang.Byte',
-  long: 'long',
-  Long: 'java.lang.Long',
-  double: 'double',
-  Double: 'java.lang.Double',
-  float: 'float',
-  Float: 'java.lang.Float',
-  String: 'java.lang.String',
-  char: 'char',
-  chars: 'char[]',
-  Character: 'java.lang.Character',
-  List: 'java.util.List',
-  Set: 'java.util.Set',
-  Iterator: 'java.util.Iterator',
-  Enumeration: 'java.util.Enumeration',
-  HashMap: 'java.util.HashMap',
-  Map: 'java.util.Map',
-  Dictionary: 'java.util.Dictionary'
+  Boolean: {name: 'java.lang.Boolean', valid: bool},
+  boolean: {name: 'boolean', valid: bool},
+  Integer: {name: 'java.lang.Integer', valid: integer},
+  int: {name: 'int', valid: integer},
+  short: {name: 'short', valid: integer},
+  Short: {name: 'java.lang.Short', valid: integer},
+  byte: {name: 'byte', valid: integer},
+  Byte: {name: 'java.lang.Byte', valid: integer},
+  // long support both string and number
+  long: {name: 'long', valid: ignore},
+  Long: {name: 'java.lang.Long', valid: ignore},
+  double: {name: 'double', valid: parseFloat},
+  Double: {name: 'java.lang.Double', valid: parseFloat},
+  float: {name: 'float', valid: parseFloat},
+  Float: {name: 'java.lang.Float', valid: parseFloat},
+  String: {name: 'java.lang.String', valid: String},
+  char: {name: 'char', valid: String},
+  chars: {name: 'char[]', valid: String},
+  Character: {name: 'java.lang.Character', valid: String},
+  List: {name: 'java.util.List', valid: ignore},
+  Set: {name: 'java.util.Set', valid: ignore},
+  Iterator: {name: 'java.util.Iterator', valid: ignore},
+  Enumeration: {name: 'java.util.Enumeration', valid: ignore},
+  HashMap: {name: 'java.util.HashMap', valid: ignore},
+  Map: {name: 'java.util.Map', valid: ignore},
+  Dictionary: {name: 'java.util.Dictionary', valid: ignore},
 };
 
 /**
@@ -92,7 +121,7 @@ Object.keys(simpleTypeMap).forEach(function (key) {
 
 exports.array = function (className, val) {
   className = simpleTypeMap[className] || className;
-  return combine('[' + className, val);
+  return combineArray(className, val);
 };
 
 /**
@@ -106,7 +135,7 @@ exports.array = function (className, val) {
 
 Object.keys(simpleTypeMap).forEach(function (key) {
   exports.array[key] = function (val) {
-    return combine('[' + simpleTypeMap[key], val);
+    return combineArray(simpleTypeMap[key], val);
   };
 });
 
@@ -120,6 +149,9 @@ Object.keys(simpleTypeMap).forEach(function (key) {
  */
 
 exports.abstract = function (abstractClassName, className, val) {
+  if (val == null) {
+    return null;
+  }
   var res = combine(className, val);
   res.$abstractClass = abstractClassName;
   return res;
@@ -134,6 +166,9 @@ exports.abstract = function (abstractClassName, className, val) {
  * }
  */
 exports.enum = function (className, name) {
+  if (name == null) {
+    return null;
+  }
   return combine(className, {
     name: name
   });
@@ -148,6 +183,9 @@ exports.enum = function (className, name) {
  * }
  */
 exports.Class = function (name) {
+  if (name == null) {
+    return null;
+  }
   return combine('java.lang.Class', {
     name: name
   });
@@ -163,6 +201,9 @@ exports.Class = function (name) {
  * }
  */
 exports.Locale = function (locale, handle) {
+  if (locale == null) {
+    return null;
+  }
   return combine(handle || 'com.caucho.hessian.io.LocaleHandle', {
     value: locale
   });
