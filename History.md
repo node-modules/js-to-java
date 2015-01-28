@@ -1,4 +1,10 @@
 
+2.1.0 / 2015-01-28 
+==================
+
+  * Merge pull request #7 from node-modules/valid
+  * fix(null): null should target type; modify int type valid
+
 2.0.0 / 2015-01-22 
 ==================
 
