@@ -24,22 +24,29 @@ describe('js to java', function () {
     java.Boolean(val).should.eql({$class: 'java.lang.Boolean', $: true});
     java.Integer('1').should.eql({$class: 'java.lang.Integer', $: 1});
     java.int('1').should.eql({$class: 'int', $: 1});
+    java.int().should.eql({$class: 'int', $: 0});
     java.short('101').should.eql({$class: 'short', $: 101});
+    java.short().should.eql({$class: 'short', $: 0});
+    java.short('str').should.eql({$class: 'short', $: 'str'});
     java.Short('101').should.eql({$class: 'java.lang.Short', $: 101});
     java.byte('1').should.eql({$class: 'byte', $: 1});
     java.Byte('1').should.eql({$class: 'java.lang.Byte', $: 1});
     java.long('1').should.eql({$class: 'long', $: '1'});
     java.Long(1).should.eql({$class: 'java.lang.Long', $: 1});
     java.double('1.02').should.eql({$class: 'double', $: 1.02});
+    java.double().should.eql({$class: 'double', $: 0});
     java.Double('1').should.eql({$class: 'java.lang.Double', $: 1});
     java.float('1').should.eql({$class: 'float', $: 1});
+    java.float().should.eql({$class: 'float', $: 0});
+    java.float('str').should.eql({$class: 'float', $: 'str'});
     java.Float('1.03').should.eql({$class: 'java.lang.Float', $: 1.03});
     java.String(123).should.eql({$class: 'java.lang.String', $: '123'});
     java.char('2').should.eql({$class: 'char', $: '2'});
     java.chars('3').should.eql({$class: 'char[]', $: '3'});
     java.Character(1).should.eql({$class: 'java.lang.Character', $: '1'});
     java.List([]).should.eql({$class: 'java.util.List', $: []});
-    (java.Integer() === null).should.be.true;
+    java.Integer().should.eql({$class: 'java.lang.Integer', $: null});
+    java.Integer('a').should.eql({$class: 'java.lang.Integer', $: 'a'});
   });
 
   it('should array work fine', function () {
@@ -90,7 +97,10 @@ describe('js to java', function () {
       $class: 'hessian.demo.Color',
       $: {name: 'RED'}
     });
-    (java.enum() === null).should.be.true;
+    java.enum('xxx').should.eql({
+      $class: 'xxx',
+      $: null
+    });
   });
 
   it('should create Class', function () {
@@ -98,7 +108,10 @@ describe('js to java', function () {
       $class: 'java.lang.Class',
       $: {name: 'java.lang.String'}
     });
-    (java.Class() === null).should.be.true;
+    java.Class().should.eql({
+      $class: 'java.lang.Class',
+      $: null
+    });
   });
 
   it('should create Locale with out input `handle`', function () {
@@ -113,7 +126,10 @@ describe('js to java', function () {
       $class: 'test.com.caucho.hessian.io.LocaleHandle',
       $: {value: 'zh_CN'}
     });
-    (java.Locale() === null).should.be.true;
+    java.Locale().should.eql({
+      $class: 'com.caucho.hessian.io.LocaleHandle',
+      $: null
+    });
   });
 
 });

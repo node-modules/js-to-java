@@ -7,9 +7,6 @@
 'use strict';
 
 var combine = function (type, value) {
-  if (value == null) {
-    return null;
-  }
   if (typeof type === 'string') {
     type = {
       name: type,
@@ -58,27 +55,43 @@ exports.__defineGetter__('combine', function () {
 // valid list
 function ignore(val) {return val;}
 function bool(val) {return !!bool;}
-function integer(val) {return parseInt(val, 10)}
-// parseInt;
-// parseFloat;
-// String
+function baseInt(val) {
+  return val == null ? 0 : integer(val);
+}
+function baseFloat(val) {
+  return val == null ? 0 : float(val);
+}
+function float(val) {
+  if (val == null) {
+    return null;
+  }
+  var r = parseFloat(val);
+  return isNaN(r) ? val : r;
+}
+function integer(val) {
+  if (val == null) {
+    return null;
+  }
+  var r = parseInt(val, 10);
+  return isNaN(r) ? val : r;
+}
 
 var simpleTypeMap = exports.simpleTypeMap = {
   Boolean: {name: 'java.lang.Boolean', valid: bool},
   boolean: {name: 'boolean', valid: bool},
   Integer: {name: 'java.lang.Integer', valid: integer},
-  int: {name: 'int', valid: integer},
-  short: {name: 'short', valid: integer},
+  int: {name: 'int', valid: baseInt},
+  short: {name: 'short', valid: baseInt},
   Short: {name: 'java.lang.Short', valid: integer},
   byte: {name: 'byte', valid: integer},
   Byte: {name: 'java.lang.Byte', valid: integer},
   // long support both string and number
   long: {name: 'long', valid: ignore},
   Long: {name: 'java.lang.Long', valid: ignore},
-  double: {name: 'double', valid: parseFloat},
-  Double: {name: 'java.lang.Double', valid: parseFloat},
-  float: {name: 'float', valid: parseFloat},
-  Float: {name: 'java.lang.Float', valid: parseFloat},
+  double: {name: 'double', valid: baseFloat},
+  Double: {name: 'java.lang.Double', valid: float},
+  float: {name: 'float', valid: baseFloat},
+  Float: {name: 'java.lang.Float', valid: float},
   String: {name: 'java.lang.String', valid: String},
   char: {name: 'char', valid: String},
   chars: {name: 'char[]', valid: String},
@@ -149,9 +162,6 @@ Object.keys(simpleTypeMap).forEach(function (key) {
  */
 
 exports.abstract = function (abstractClassName, className, val) {
-  if (val == null) {
-    return null;
-  }
   var res = combine(className, val);
   res.$abstractClass = abstractClassName;
   return res;
@@ -166,12 +176,10 @@ exports.abstract = function (abstractClassName, className, val) {
  * }
  */
 exports.enum = function (className, name) {
-  if (name == null) {
-    return null;
-  }
-  return combine(className, {
+  var value = name ? {
     name: name
-  });
+  } : null
+  return combine(className, value);
 };
 
 /**
@@ -183,12 +191,10 @@ exports.enum = function (className, name) {
  * }
  */
 exports.Class = function (name) {
-  if (name == null) {
-    return null;
-  }
-  return combine('java.lang.Class', {
+  var value = name ? {
     name: name
-  });
+  } : null;
+  return combine('java.lang.Class', value);
 };
 
 /**
@@ -201,10 +207,8 @@ exports.Class = function (name) {
  * }
  */
 exports.Locale = function (locale, handle) {
-  if (locale == null) {
-    return null;
-  }
-  return combine(handle || 'com.caucho.hessian.io.LocaleHandle', {
+  var value = locale ? {
     value: locale
-  });
+  } : null;
+  return combine(handle || 'com.caucho.hessian.io.LocaleHandle', value);
 };
