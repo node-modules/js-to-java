@@ -54,7 +54,7 @@ exports.__defineGetter__('combine', function () {
 
 // valid list
 function ignore(val) {return val;}
-function bool(val) {return !!bool;}
+function bool(val) {return !!val;}
 function baseInt(val) {
   return val == null ? 0 : integer(val);
 }
@@ -75,6 +75,12 @@ function integer(val) {
   var r = parseInt(val, 10);
   return isNaN(r) ? val : r;
 }
+function string(val) {
+  if (val == null) {
+    return null;
+  }
+  return String(val);
+}
 
 var simpleTypeMap = exports.simpleTypeMap = {
   Boolean: {name: 'java.lang.Boolean', valid: bool},
@@ -92,10 +98,10 @@ var simpleTypeMap = exports.simpleTypeMap = {
   Double: {name: 'java.lang.Double', valid: float},
   float: {name: 'float', valid: baseFloat},
   Float: {name: 'java.lang.Float', valid: float},
-  String: {name: 'java.lang.String', valid: String},
-  char: {name: 'char', valid: String},
-  chars: {name: 'char[]', valid: String},
-  Character: {name: 'java.lang.Character', valid: String},
+  String: {name: 'java.lang.String', valid: string},
+  char: {name: 'char', valid: string},
+  chars: {name: 'char[]', valid: string},
+  Character: {name: 'java.lang.Character', valid: string},
   List: {name: 'java.util.List', valid: ignore},
   Set: {name: 'java.util.Set', valid: ignore},
   Iterator: {name: 'java.util.Iterator', valid: ignore},
