@@ -116,6 +116,21 @@ describe('js to java', function () {
       $class: 'xxx',
       $: null
     });
+    java.array.enum('com.xxx').should.eql({
+      $class: '[com.xxx',
+      $: null
+    });
+    java.array.enum('com.xxx', ['aaa']).should.eql({
+      $class: '[com.xxx',
+      $: [
+        {
+          $class: 'com.xxx',
+          $: {
+            name: 'aaa'
+          }
+        }
+      ]
+    });
   });
 
   it('should create Class', function () {
@@ -127,12 +142,42 @@ describe('js to java', function () {
       $class: 'java.lang.Class',
       $: null
     });
+    java.array.Class().should.eql({
+      $class: '[java.lang.Class',
+      $: null
+    });
+    java.array.Class(['aaa']).should.eql({
+      $class: '[java.lang.Class',
+      $: [
+        {
+          $class: 'java.lang.Class',
+          $: {
+            name: 'aaa'
+          }
+        }
+      ]
+    });
   });
 
   it('should create Locale with out input `handle`', function () {
     java.Locale('zh_CN').should.eql({
       $class: 'com.caucho.hessian.io.LocaleHandle',
       $: {value: 'zh_CN'}
+    });
+    java.array.Locale().should.eql({
+      $class: '[com.caucho.hessian.io.LocaleHandle',
+      $: null
+    });
+    java.array.Locale(['zh_CN']).should.eql({
+      $class: '[com.caucho.hessian.io.LocaleHandle',
+      $: [
+        {
+          $class: 'com.caucho.hessian.io.LocaleHandle',
+          $: {
+            value: 'zh_CN'
+          }
+        }
+      ]
     });
   });
 

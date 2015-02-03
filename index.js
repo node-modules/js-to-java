@@ -20,9 +20,12 @@ var combine = function (type, value) {
 };
 
 var combineArray = function (type, value) {
-  var values = [];
-  for (var i = 0, len = value.length; i < len; i++) {
-    values.push(combine(type, value[i]));
+  var values = null;
+  if (value) {
+    values = [];
+    for (var i = 0, len = value.length; i < len; i++) {
+      values.push(combine(type, value[i]));
+    }
   }
   return {
     $class: '[' + (type.name || type),
@@ -188,6 +191,20 @@ exports.enum = function (className, name) {
   return combine(className, value);
 };
 
+exports.array.enum = function (className, names) {
+  var values = null;
+  if (names) {
+    values = [];
+    for (var i = 0, len = names.length; i < len; i++) {
+      values.push(exports.enum(className, names[i]));
+    }
+  }
+  return {
+    $class: '[' + className,
+    $: values
+  };
+};
+
 /**
  * java.Class("java.lang.String");
  * =>
@@ -201,6 +218,20 @@ exports.Class = function (name) {
     name: name
   } : null;
   return combine('java.lang.Class', value);
+};
+
+exports.array.Class = function (names) {
+  var values = null;
+  if (names) {
+    values = [];
+    for (var i = 0, len = names.length; i < len; i++) {
+      values.push(exports.Class(names[i]));
+    }
+  }
+  return {
+    $class: '[java.lang.Class',
+    $: values
+  };
 };
 
 /**
@@ -217,4 +248,18 @@ exports.Locale = function (locale, handle) {
     value: locale
   } : null;
   return combine(handle || 'com.caucho.hessian.io.LocaleHandle', value);
+};
+
+exports.array.Locale = function (locales, handle) {
+  var values = null;
+  if (locales) {
+    values = [];
+    for (var i = 0, len = locales.length; i < len; i++) {
+      values.push(exports.Locale(locales[i], handle));
+    }
+  }
+  return {
+    $class: '[' + (handle || 'com.caucho.hessian.io.LocaleHandle'),
+    $: values
+  };
 };
