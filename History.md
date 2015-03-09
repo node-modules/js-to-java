@@ -1,4 +1,9 @@
 
+2.0.4 / 2015-03-09
+==================
+
+  * perf(enum): Improve the enumeration type conversion
+
 2.0.3 / 2015-02-03
 ==================
 
