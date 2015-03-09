@@ -185,9 +185,17 @@ exports.abstract = function (abstractClassName, className, val) {
  * }
  */
 exports.enum = function (className, name) {
-  var value = name ? {
-    name: name
-  } : null
+  var value;
+  if (!name) {
+    value = null;  
+  } else if (typeof name === 'string') {
+    value = {name: name};
+  } else if (typeof name === 'object' && name.name) {
+    value = {name: name.name};
+  } else {
+    // Still to return the wrong value, when the error is convenient to find the reasons.
+    value = name;
+  }
   return combine(className, value);
 };
 

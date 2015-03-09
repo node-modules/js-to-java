@@ -125,6 +125,8 @@ java.Locale('zh_CN', ['com.caucho.hessian.io.LocaleHandle']);
 
 ```js
 java.enum('hessian.demo.Color', 'RED');
+  or
+java.enum('hessian.demo.Color', {name: 'RED'});
 // => { $class: 'hessian.demo.Color', $: { name: 'RED' } }
 ```
 

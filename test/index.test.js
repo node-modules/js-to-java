@@ -112,6 +112,10 @@ describe('js to java', function () {
       $class: 'hessian.demo.Color',
       $: {name: 'RED'}
     });
+    java.enum('hessian.demo.Color', {name: 'RED'}).should.eql({
+      $class: 'hessian.demo.Color',
+      $: {name: 'RED'}
+    });
     java.enum('xxx').should.eql({
       $class: 'xxx',
       $: null
@@ -121,6 +125,17 @@ describe('js to java', function () {
       $: null
     });
     java.array.enum('com.xxx', ['aaa']).should.eql({
+      $class: '[com.xxx',
+      $: [
+        {
+          $class: 'com.xxx',
+          $: {
+            name: 'aaa'
+          }
+        }
+      ]
+    });
+    java.array.enum('com.xxx', [{name: 'aaa'}]).should.eql({
       $class: '[com.xxx',
       $: [
         {
