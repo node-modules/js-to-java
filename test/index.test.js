@@ -32,7 +32,7 @@ describe('js to java', function () {
     java.short('101').should.eql({$class: 'short', $: 101});
     java.short('str').should.eql({$class: 'short', $: 'str'});
     java.short().should.eql({$class: 'short', $: 0});
-    
+
     java.byte('1').should.eql({$class: 'byte', $: 1});
     java.Byte('1').should.eql({$class: 'java.lang.Byte', $: 1});
     java.Byte().should.eql({$class: 'java.lang.Byte', $: null});
@@ -44,20 +44,20 @@ describe('js to java', function () {
     java.double().should.eql({$class: 'double', $: 0});
     java.Double('1').should.eql({$class: 'java.lang.Double', $: 1});
     java.Double().should.eql({$class: 'java.lang.Double', $: null});
-    
+
     java.float('1').should.eql({$class: 'float', $: 1});
     java.float().should.eql({$class: 'float', $: 0});
     java.float('str').should.eql({$class: 'float', $: 'str'});
     java.Float('1.03').should.eql({$class: 'java.lang.Float', $: 1.03});
     java.Float().should.eql({$class: 'java.lang.Float', $: null});
-    
+
     java.String(123).should.eql({$class: 'java.lang.String', $: '123'});
     java.String().should.eql({$class: 'java.lang.String', $: null});
-    
+
     java.char('2').should.eql({$class: 'char', $: '2'});
     java.chars('3').should.eql({$class: 'char[]', $: '3'});
     java.char().should.eql({$class: 'char', $: null});
-    
+
     java.Character(1).should.eql({$class: 'java.lang.Character', $: '1'});
     java.List([]).should.eql({$class: 'java.util.List', $: []});
     java.Integer().should.eql({$class: 'java.lang.Integer', $: null});
@@ -205,6 +205,12 @@ describe('js to java', function () {
       $class: 'com.caucho.hessian.io.LocaleHandle',
       $: null
     });
+  });
+
+  it('should check type with combile', function () {
+    java('java.lang.Integer', '123').should.eql({$class: 'java.lang.Integer', $: 123});
+    java('int', '123').should.eql({$class: 'int', $: 123});
+    java('java.lang.String', 123).should.eql({$class: 'java.lang.String', $: '123'});
   });
 
 });

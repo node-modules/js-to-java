@@ -8,7 +8,7 @@
 
 var combine = function (type, value) {
   if (typeof type === 'string') {
-    type = {
+    type = simpleTypeMap[type] || {
       name: type,
       valid: ignore
     };
@@ -114,6 +114,11 @@ var simpleTypeMap = exports.simpleTypeMap = {
   Dictionary: {name: 'java.util.Dictionary', valid: ignore},
 };
 
+for (var key in simpleTypeMap) {
+  var type = simpleTypeMap[key];
+  simpleTypeMap[type.name] = type;
+}
+
 /**
  * java.Boolean(true);
  * =>
@@ -187,7 +192,7 @@ exports.abstract = function (abstractClassName, className, val) {
 exports.enum = function (className, name) {
   var value;
   if (!name) {
-    value = null;  
+    value = null;
   } else if (typeof name === 'string') {
     value = {name: name};
   } else if (typeof name === 'object' && name.name) {
