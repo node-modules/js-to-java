@@ -228,7 +228,7 @@ exports.array.enum = function (className, names) {
  */
 exports.Class = function (name) {
   var value = name ? {
-    name: name
+    name: name.indexOf('[') !== -1 ? ('[L' + name.replace(/(\[L)|(\[)|;/g, '') + ';') : name
   } : null;
   return combine('java.lang.Class', value);
 };

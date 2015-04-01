@@ -157,6 +157,30 @@ describe('js to java', function () {
       $class: 'java.lang.Class',
       $: null
     });
+    java.Class('[java.lang.String').should.eql({
+      $class: 'java.lang.Class',
+      $: {
+        name: '[Ljava.lang.String;'
+      }
+    });
+    java.Class('[Ljava.lang.String;').should.eql({
+      $class: 'java.lang.Class',
+      $: {
+        name: '[Ljava.lang.String;'
+      }
+    });
+    java.Class('[Ljava.lang.String').should.eql({
+      $class: 'java.lang.Class',
+      $: {
+        name: '[Ljava.lang.String;'
+      }
+    });
+    java.Class('[Ljava.Lang.String').should.eql({
+      $class: 'java.lang.Class',
+      $: {
+        name: '[Ljava.Lang.String;'
+      }
+    });
     java.array.Class().should.eql({
       $class: '[java.lang.Class',
       $: null
