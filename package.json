@@ -1,6 +1,6 @@
 {
   "name": "js-to-java",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "easy way to wrap js object to java object",
   "main": "index.js",
   "scripts": {
