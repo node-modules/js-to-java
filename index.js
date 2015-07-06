@@ -227,9 +227,21 @@ exports.array.enum = function (className, names) {
  * }
  */
 exports.Class = function (name) {
-  var value = name ? {
-    name: name.indexOf('[') !== -1 ? ('[L' + name.replace(/(\[L)|(\[)|;/g, '') + ';') : name
-  } : null;
+  var value;
+  if (!name) {
+    value = null;
+  } else if (typeof name === 'string') {
+    value = {
+      name: name.indexOf('[') !== -1 ? ('[L' + name.replace(/(\[L)|(\[)|;/g, '') + ';') : name
+    };
+  } else if (typeof name === 'object' && name.name) {
+    value = {
+      name: name.name
+    };
+  } else {
+    // Still to return the wrong value, when the error is convenient to find the reasons.
+    value = name;
+  }
   return combine('java.lang.Class', value);
 };
 
