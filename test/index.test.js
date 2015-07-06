@@ -149,6 +149,10 @@ describe('js to java', function () {
   });
 
   it('should create Class', function () {
+    java.Class({name: 'java.lang.String'}).should.eql({
+      $class: 'java.lang.Class',
+      $: {name: 'java.lang.String'}
+    });
     java.Class('java.lang.String').should.eql({
       $class: 'java.lang.Class',
       $: {name: 'java.lang.String'}
