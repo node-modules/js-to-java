@@ -235,6 +235,30 @@ describe('js to java', function () {
     });
   });
 
+  it('should create BigDecimal', function () {
+    java.BigDecimal('100.06').should.eql({
+      $class: 'java.math.BigDecimal',
+      $: {value: '100.06'}
+    });
+    java.array.BigDecimal(['100.06', '200.07']).should.eql({
+      $class: '[java.math.BigDecimal',
+      $: [
+        {
+          $class: 'java.math.BigDecimal',
+          $: {value: '100.06'}
+        },
+        {
+          $class: 'java.math.BigDecimal',
+          $: {value: '200.07'}
+        }
+      ]
+    });
+    java.array.BigDecimal(null).should.eql({
+      $class: '[java.math.BigDecimal',
+      $: null
+    });
+  });
+
   it('should check type with combile', function () {
     java('java.lang.Integer', '123').should.eql({$class: 'java.lang.Integer', $: 123});
     java('int', '123').should.eql({$class: 'int', $: 123});

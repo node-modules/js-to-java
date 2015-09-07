@@ -288,3 +288,30 @@ exports.array.Locale = function (locales, handle) {
     $: values
   };
 };
+
+/**
+ * // for java.math.BigDecimal
+ * java.BigDecimal("100.06");
+ * =>
+ * {
+ *   $class: 'java.math.BigDecimal',
+ *   $: { value: '100.06' }
+ * }
+ */
+exports.BigDecimal = function (val) {
+  return combine('java.math.BigDecimal', { value: String(val) });
+};
+
+exports.array.BigDecimal = function (vals) {
+  var values = null;
+  if (vals) {
+    values = [];
+    for (var i = 0, len = vals.length; i < len; i++) {
+      values.push(exports.BigDecimal(vals[i]));
+    }
+  }
+  return {
+    $class: '[java.math.BigDecimal',
+    $: values
+  };
+};
