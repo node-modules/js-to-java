@@ -57,13 +57,17 @@ exports.__defineGetter__('combine', function () {
 
 // valid list
 function ignore(val) {return val;}
+
 function bool(val) {return !!val;}
+
 function baseInt(val) {
   return val == null ? 0 : integer(val);
 }
+
 function baseFloat(val) {
   return val == null ? 0 : float(val);
 }
+
 function float(val) {
   if (val == null) {
     return null;
@@ -71,6 +75,7 @@ function float(val) {
   var r = parseFloat(val);
   return isNaN(r) ? val : r;
 }
+
 function integer(val) {
   if (val == null) {
     return null;
@@ -78,11 +83,19 @@ function integer(val) {
   var r = parseInt(val, 10);
   return isNaN(r) ? val : r;
 }
+
 function string(val) {
   if (val == null) {
     return null;
   }
   return String(val);
+}
+
+function safeLong(val) {
+  if (typeof val !== 'string') {
+    console.warn('Long value: %d is a Number, Use String type will be more safe!', val);
+  }
+  return val;
 }
 
 var simpleTypeMap = exports.simpleTypeMap = {
@@ -95,8 +108,8 @@ var simpleTypeMap = exports.simpleTypeMap = {
   byte: {name: 'byte', valid: integer},
   Byte: {name: 'java.lang.Byte', valid: integer},
   // long support both string and number
-  long: {name: 'long', valid: ignore},
-  Long: {name: 'java.lang.Long', valid: ignore},
+  long: {name: 'long', valid: safeLong},
+  Long: {name: 'java.lang.Long', valid: safeLong},
   double: {name: 'double', valid: baseFloat},
   Double: {name: 'java.lang.Double', valid: float},
   float: {name: 'float', valid: baseFloat},
@@ -313,5 +326,34 @@ exports.array.BigDecimal = function (vals) {
   return {
     $class: '[java.math.BigDecimal',
     $: values
+  };
+};
+
+exports.Currency = function (value) {
+  if (typeof value === 'string') {
+    value = {
+      currencyCode: value,
+    };
+  } else if (typeof value === 'object' && value.currencyCode) {
+    value = {
+      currencyCode: value.currencyCode,
+    };
+  } else if (!value || !value.currencyCode) {
+    value = null;
+  }
+  return combine('java.util.Currency', value);
+};
+
+exports.array.Currency = function (vals) {
+  var values = null;
+  if (Array.isArray(vals)) {
+    values = [];
+    for (var i = 0, len = vals.length; i < len; i++) {
+      values.push(exports.Currency(vals[i]));
+    }
+  }
+  return {
+    $class: '[java.util.Currency',
+    $: values,
   };
 };
