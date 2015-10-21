@@ -29,14 +29,13 @@
     "url": "https://github.com/node-modules/js-to-java/issues"
   },
   "homepage": "https://github.com/node-modules/js-to-java",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "autod": "*",
     "contributors": "*",
     "cov": "*",
     "istanbul": "*",
     "mocha": "*",
-    "should": "4"
+    "should": "7.1.1"
   }
 }
