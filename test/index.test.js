@@ -62,6 +62,7 @@ describe('js to java', function () {
     java.List([]).should.eql({$class: 'java.util.List', $: []});
     java.Integer().should.eql({$class: 'java.lang.Integer', $: null});
     java.Integer('a').should.eql({$class: 'java.lang.Integer', $: 'a'});
+
   });
 
   it('should array work fine', function () {
@@ -263,6 +264,17 @@ describe('js to java', function () {
     java('java.lang.Integer', '123').should.eql({$class: 'java.lang.Integer', $: 123});
     java('int', '123').should.eql({$class: 'int', $: 123});
     java('java.lang.String', 123).should.eql({$class: 'java.lang.String', $: '123'});
+  });
+
+  it('should create Currency', function () {
+    java.Currency('CNY').should.eql({$class: 'java.util.Currency', $: {currencyCode: 'CNY'}});
+    java.Currency({currencyCode: undefined}).should.eql({$class: 'java.util.Currency', $: null});
+    java.Currency(undefined).should.eql({$class: 'java.util.Currency', $: null});
+    java.Currency({currencyCode: 'CNY'}).should.eql({$class: 'java.util.Currency', $: {currencyCode: 'CNY'}});
+  
+    java.array.Currency([]).should.eql({$class: '[java.util.Currency', $: []});
+    java.array.Currency().should.eql({$class: '[java.util.Currency', $: null});
+    java.array.Currency(['CNY']).should.eql({$class: '[java.util.Currency', $: [{$class: 'java.util.Currency', $: {currencyCode: 'CNY'}}]});
   });
 
 });
