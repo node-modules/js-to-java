@@ -92,7 +92,7 @@ function string(val) {
 }
 
 function safeLong(val) {
-  if (typeof val !== 'string') {
+  if (process.env.NODE_ENV !== 'production' && typeof val !== 'string') {
     console.warn('Long value: %d is a Number, Use String type will be more safe!', val);
   }
   return val;
