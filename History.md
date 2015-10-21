@@ -1,4 +1,10 @@
 
+2.2.0 / 2015-10-21
+==================
+
+ * chore: add env check
+ * feat: currency & safeLong
+ * chore: use codecov.io
 
 2.1.0 / 2015-09-07 
 ==================
