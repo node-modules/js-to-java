@@ -357,3 +357,5 @@ exports.array.Currency = function (vals) {
     $: values,
   };
 };
+
+exports.revert = require('./lib/revert');

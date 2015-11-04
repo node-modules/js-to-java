@@ -169,6 +169,25 @@ Available built-in classes shortcuts:
 - `java.array.Map(values)`
 - `java.array.Dictionary(values)`
 
+### java.revert(obj)
+
+Wrap java object back to js object reversely.
+
+```js
+var data = {
+  $class: 'xxxx',
+  $: {
+    foo: 'bar',
+    bar: {
+      $class: 'int',
+      $: 3,
+    },
+  },
+};
+java.revert(data);
+// => {foo: 'bar', bar: 3}
+```
+
 ## License
 
 MIT
