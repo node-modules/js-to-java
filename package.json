@@ -10,6 +10,7 @@
   "scripts": {
     "test": "mocha -R spec -t 3000 -r should test/*.test.js",
     "test-cov": "istanbul cover node_modules/.bin/_mocha -- -t 3000 -r should test/*.test.js",
+    "ci": "npm run jshint && npm run test-cov",
     "jshint": "jshint .",
     "autod": "autod -w --prefix '~' -t test -e examples"
   },
@@ -37,6 +38,7 @@
     "cov": "*",
     "istanbul": "*",
     "mocha": "*",
-    "should": "7.1.1"
+    "should": "7.1.1",
+    "jshint": "2"
   }
 }
