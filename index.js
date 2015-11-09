@@ -61,14 +61,17 @@ function ignore(val) {return val;}
 function bool(val) {return !!val;}
 
 function baseInt(val) {
+  /* jshint eqnull: true */
   return val == null ? 0 : integer(val);
 }
 
 function baseFloat(val) {
+  /* jshint eqnull: true */
   return val == null ? 0 : float(val);
 }
 
 function float(val) {
+  /* jshint eqnull: true */
   if (val == null) {
     return null;
   }
@@ -77,6 +80,7 @@ function float(val) {
 }
 
 function integer(val) {
+  /* jshint eqnull: true */
   if (val == null) {
     return null;
   }
@@ -85,6 +89,7 @@ function integer(val) {
 }
 
 function string(val) {
+  /* jshint eqnull: true */
   if (val == null) {
     return null;
   }
@@ -357,3 +362,5 @@ exports.array.Currency = function (vals) {
     $: values,
   };
 };
+
+exports.revert = require('./lib/revert');
