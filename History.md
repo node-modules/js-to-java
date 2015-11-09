@@ -1,4 +1,11 @@
 
+2.3.0 / 2015-11-09
+==================
+
+  * chore: jslint and ci
+  * feat: add revert method as an implementation of java to js
+  * chore(package): update dependencies
+
 2.2.0 / 2015-10-21
 ==================
 
