@@ -97,7 +97,7 @@ function string(val) {
 }
 
 function safeLong(val) {
-  if (process.env.NODE_ENV !== 'production' && typeof val !== 'string') {
+  if (process.env.NODE_ENV !== 'production' && typeof val === 'number' && Math.abs(val) > Math.pow(2, 53)) {
     console.trace('Do not be nervous, this is just a warning! Long value: ' + val + ' is a Number, Use String type will be more safe!');
   }
   return val;
