@@ -96,9 +96,10 @@ function string(val) {
   return String(val);
 }
 
-function safeLong(val) {
-  if (process.env.NODE_ENV !== 'production' && typeof val !== 'string') {
-    console.trace('Do not be nervous, this is just a warning! Long value: ' + val + ' is a Number, Use String type will be more safe!');
+function number(val) {
+  /* jshint eqnull: true */
+  if (val == null) {
+    return 0;
   }
   return val;
 }
@@ -113,8 +114,8 @@ var simpleTypeMap = exports.simpleTypeMap = {
   byte: {name: 'byte', valid: integer},
   Byte: {name: 'java.lang.Byte', valid: integer},
   // long support both string and number
-  long: {name: 'long', valid: safeLong},
-  Long: {name: 'java.lang.Long', valid: safeLong},
+  long: {name: 'long', valid: number},
+  Long: {name: 'java.lang.Long', valid: number},
   double: {name: 'double', valid: baseFloat},
   Double: {name: 'java.lang.Double', valid: float},
   float: {name: 'float', valid: baseFloat},
