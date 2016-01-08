@@ -1,4 +1,10 @@
 
+2.3.2 / 2016-01-08
+==================
+
+  * chore: rm safeLong warn
+  * chore(package): update should to version 8.0.2
+
 2.3.1 / 2015-11-27
 ==================
 
