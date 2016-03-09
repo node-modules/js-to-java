@@ -122,6 +122,7 @@ java.Locale('zh_CN', ['com.caucho.hessian.io.LocaleHandle']);
 
 ```js
 java.BigDecimal('100.06');
+// Or java.BigDecimal({value: '100.06'});
 // => { $class: 'java.math.BigDecimal', $: { value: '100.06' } }
 ```
 
