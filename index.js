@@ -318,6 +318,12 @@ exports.array.Locale = function (locales, handle) {
  * }
  */
 exports.BigDecimal = function (val) {
+  if (val === null || val === undefined) {
+    val = 0;
+  }
+  if (typeof val === 'object') {
+    val = val.value || 0;
+  }
   return combine('java.math.BigDecimal', { value: String(val) });
 };
 
