@@ -302,7 +302,12 @@ describe('js to java', function () {
     };
     java.BigDecimal('100.06').should.eql(result);
     java.revert(result).should.eql({value: '100.06'});
-
+    java.BigDecimal({value: '100.06'}).should.eql(result);
+    java.BigDecimal({value: 100.06}).should.eql(result);
+    java.BigDecimal({val: '100.06'}).should.eql({
+      $class: 'java.math.BigDecimal',
+      $: {value: '0'}
+    });
     result = {
       $class: '[java.math.BigDecimal',
       $: [
