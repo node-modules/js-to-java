@@ -25,7 +25,7 @@ describe('js to java', function () {
     java.revert({$class: 'boolean', $: true}).should.equal(true);
     java.Boolean(val).should.eql({$class: 'java.lang.Boolean', $: true});
     java.revert({$class: 'java.lang.Boolean', $: true}).should.equal(true);
-    java.Boolean().should.eql({$class: 'java.lang.Boolean', $: false});
+    java.Boolean().should.eql({$class: 'java.lang.Boolean', $: null});
     java.revert({$class: 'java.lang.Boolean', $: false}).should.equal(false);
 
     java.Integer('1').should.eql({$class: 'java.lang.Integer', $: 1});
@@ -56,6 +56,7 @@ describe('js to java', function () {
     java.Long(1).should.eql({$class: 'java.lang.Long', $: 1});
     java.revert({$class: 'java.lang.Long', $: 1}).should.equal(1);
     java.long().should.eql({$class: 'long', $: 0});
+    java.Long().should.eql({$class: 'java.lang.Long', $: null});
 
     java.double('1.02').should.eql({$class: 'double', $: 1.02});
     java.revert({$class: 'double', $: 1.02}).should.equal(1.02);
