@@ -96,10 +96,18 @@ function string(val) {
   return String(val);
 }
 
-function number(val) {
+function baseNumber(val) {
   /* jshint eqnull: true */
   if (val == null) {
     return 0;
+  }
+  return val;
+}
+
+function number(val) {
+  /* jshint eqnull: true */
+  if (val == null) {
+    return null;
   }
   return val;
 }
@@ -111,10 +119,10 @@ var simpleTypeMap = exports.simpleTypeMap = {
   int: {name: 'int', valid: baseInt},
   short: {name: 'short', valid: baseInt},
   Short: {name: 'java.lang.Short', valid: integer},
-  byte: {name: 'byte', valid: integer},
+  byte: {name: 'byte', valid: baseInt},
   Byte: {name: 'java.lang.Byte', valid: integer},
   // long support both string and number
-  long: {name: 'long', valid: number},
+  long: {name: 'long', valid: baseNumber},
   Long: {name: 'java.lang.Long', valid: number},
   double: {name: 'double', valid: baseFloat},
   Double: {name: 'java.lang.Double', valid: float},

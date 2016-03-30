@@ -56,6 +56,7 @@ describe('js to java', function () {
     java.Long(1).should.eql({$class: 'java.lang.Long', $: 1});
     java.revert({$class: 'java.lang.Long', $: 1}).should.equal(1);
     java.long().should.eql({$class: 'long', $: 0});
+    java.Long().should.eql({$class: 'java.lang.Long', $: null});
 
     java.double('1.02').should.eql({$class: 'double', $: 1.02});
     java.revert({$class: 'double', $: 1.02}).should.equal(1.02);
