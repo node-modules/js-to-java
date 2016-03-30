@@ -58,7 +58,15 @@ exports.__defineGetter__('combine', function () {
 // valid list
 function ignore(val) {return val;}
 
-function bool(val) {return !!val;}
+function baseBool(val) {return !!val;}
+
+function bool(val) {
+  /* jshint eqnull: true */
+  if (val == null) {
+    return null;
+  }
+  return !!val;
+}
 
 function baseInt(val) {
   /* jshint eqnull: true */
@@ -96,7 +104,7 @@ function string(val) {
   return String(val);
 }
 
-function baseNumber(val) {
+function baseLong(val) {
   /* jshint eqnull: true */
   if (val == null) {
     return 0;
@@ -104,7 +112,7 @@ function baseNumber(val) {
   return val;
 }
 
-function number(val) {
+function long(val) {
   /* jshint eqnull: true */
   if (val == null) {
     return null;
@@ -114,7 +122,7 @@ function number(val) {
 
 var simpleTypeMap = exports.simpleTypeMap = {
   Boolean: {name: 'java.lang.Boolean', valid: bool},
-  boolean: {name: 'boolean', valid: bool},
+  boolean: {name: 'boolean', valid: baseBool},
   Integer: {name: 'java.lang.Integer', valid: integer},
   int: {name: 'int', valid: baseInt},
   short: {name: 'short', valid: baseInt},
@@ -122,8 +130,8 @@ var simpleTypeMap = exports.simpleTypeMap = {
   byte: {name: 'byte', valid: baseInt},
   Byte: {name: 'java.lang.Byte', valid: integer},
   // long support both string and number
-  long: {name: 'long', valid: baseNumber},
-  Long: {name: 'java.lang.Long', valid: number},
+  long: {name: 'long', valid: baseLong},
+  Long: {name: 'java.lang.Long', valid: long},
   double: {name: 'double', valid: baseFloat},
   Double: {name: 'java.lang.Double', valid: float},
   float: {name: 'float', valid: baseFloat},
