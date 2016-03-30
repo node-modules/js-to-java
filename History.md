@@ -1,5 +1,11 @@
 
-2.3.n / 2016-03-09
+2.3.5 / 2016-03-30
+==================
+
+  * fix: Boolean null
+  * fix: Long == null should return null
+
+2.3.4 / 2016-03-09
 ==================
 
   * fix: bigdecimal support {value}
