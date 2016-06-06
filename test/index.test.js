@@ -1,9 +1,3 @@
-/*!
- * js-to-java - index.js
- * Copyright(c) 2014 dead_horse <dead_horse@qq.com>
- * MIT Licensed
- */
-
 'use strict';
 
 /**
@@ -350,7 +344,7 @@ describe('js to java', function () {
     should(java.revert({$class: 'java.util.Currency', $: null})).equal(null);
     java.Currency({currencyCode: 'CNY'}).should.eql({$class: 'java.util.Currency', $: {currencyCode: 'CNY'}});
     java.revert({$class: 'java.util.Currency', $: {currencyCode: 'CNY'}}).should.eql({currencyCode: 'CNY'});
-  
+
     java.array.Currency([]).should.eql({$class: '[java.util.Currency', $: []});
     java.revert({$class: '[java.util.Currency', $: []}).should.eql([]);
     java.array.Currency().should.eql({$class: '[java.util.Currency', $: null});
