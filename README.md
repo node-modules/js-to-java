@@ -170,6 +170,26 @@ Available built-in classes shortcuts:
 - `java.array.Map(values)`
 - `java.array.Dictionary(values)`
 
+### java.exception(err[, className])
+
+default className is `java.lang.Exception`.
+
+```js
+{
+  '$class': `${className}`,
+  '$': {
+    detailMessage: {
+      '$class': 'java.lang.String',
+      '$': `${err.name}: ${err.message}`,
+    },
+    stackTrace: {
+      '$class': '[java.lang.StackTraceElement',
+      '$': stackTraceElements,
+    },
+  },
+}
+```
+
 ### java.revert(obj)
 
 Wrap java object back to js object reversely.

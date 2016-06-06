@@ -1,9 +1,3 @@
-/**!
- * js-to-java - index.js
- * Copyright(c) 2014 dead_horse <dead_horse@qq.com>
- * MIT Licensed
- */
-
 'use strict';
 
 var combine = function (type, value) {
@@ -387,3 +381,4 @@ exports.array.Currency = function (vals) {
 };
 
 exports.revert = require('./lib/revert');
+exports.exception = require('./lib/exception');
