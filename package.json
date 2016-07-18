@@ -33,7 +33,7 @@
   "homepage": "https://github.com/node-modules/js-to-java",
   "dependencies": {},
   "devDependencies": {
-    "autod": "*",
+    "autod": "2.5.2",
     "contributors": "*",
     "cov": "*",
     "istanbul": "*",
