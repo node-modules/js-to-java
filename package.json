@@ -39,6 +39,6 @@
     "istanbul": "*",
     "mocha": "*",
     "should": "10.0.0",
-    "jshint": "2"
+    "jshint": "2.9.2"
   }
 }
