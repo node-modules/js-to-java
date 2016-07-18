@@ -36,7 +36,7 @@
     "autod": "*",
     "contributors": "*",
     "cov": "*",
-    "istanbul": "*",
+    "istanbul": "0.4.1",
     "mocha": "*",
     "should": "10.0.0",
     "jshint": "2"
