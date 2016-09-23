@@ -123,6 +123,36 @@ describe('js to java', function () {
     java.revert(result).should.eql([1, 2, 3]);
   });
 
+  it('should dyadicArray work fine', function() {
+    var result = {
+      $class: '[[java.lang.Integer',
+      $: [{
+        $class: '[java.lang.Integer',
+        $: [
+          {
+            $class: 'java.lang.Integer',
+            $: 1,
+          }
+        ]
+      }]
+    };
+    var result2 = {
+      $class: '[[java.lang.Integer',
+      $: [{
+        $class: '[java.lang.Integer',
+        $: [
+          {
+            $class: 'java.lang.Integer',
+            $: null,
+          }
+        ]
+      }]
+    };
+    java.dyadicArray.Integer([[1]]).should.eql(result);
+    java.dyadicArray('java.lang.Integer', [['1']]).should.eql(result);
+    java.dyadicArray('java.lang.Integer', [[null]]).should.eql(result2);
+  });
+
   it('should abstractClass work ok', function () {
     var result = {
       $class: 'com.java.Object',

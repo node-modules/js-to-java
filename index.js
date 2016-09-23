@@ -27,6 +27,20 @@ var combineArray = function (type, value) {
   };
 };
 
+var combineDyadicArray = function(type, value) {
+  var values = null;
+  if (value) {
+    values = [];
+    for (var i = 0, len = value.length; i < len; i++) {
+      values.push(combineArray(type, value[i]));
+    }
+  }
+  return {
+    $class: '[[' + (type.name || type),
+    $: values
+  };
+}
+
 /**
  * java('com.java.Object', {})
  * =>
@@ -179,6 +193,37 @@ exports.array = function (className, val) {
   className = simpleTypeMap[className] || className;
   return combineArray(className, val);
 };
+
+/**
+ * java.dyadicArray('Boolean', [[false]]);
+ * =>
+ * {
+ *   $class: '[[java.lang.Boolean',
+ *   $: [[false]]
+ * }
+ *
+ * @param {String} className class name in array
+ * @param {Array} val
+ */
+exports.dyadicArray = function(className, val) {
+  className = simpleTypeMap[className] || className;
+  return combineDyadicArray(className, val);
+}
+
+/**
+ * java.dyadicArray.Boolean([[false]]);
+ * =>
+ * {
+ *   $class: '[[java.lang.Boolean',
+ *   $: [[false]]
+ * }
+ */
+
+Object.keys(simpleTypeMap).forEach(function (key) {
+  exports.dyadicArray[key] = function (val) {
+    return combineDyadicArray(simpleTypeMap[key], val);
+  };
+});
 
 /**
  * java.array.Boolean([true, false]);
