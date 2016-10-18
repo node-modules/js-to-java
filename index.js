@@ -22,7 +22,7 @@ var combineArray = function (type, value) {
     }
   }
   return {
-    $class: '[' + (type.name || type),
+    $class: '[L' + (type.name || type),
     $: values
   };
 };
