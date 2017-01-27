@@ -38,7 +38,7 @@
     "cov": "*",
     "istanbul": "*",
     "mocha": "*",
-    "should": "10.0.0",
+    "should": "11.2.0",
     "jshint": "2"
   }
 }
