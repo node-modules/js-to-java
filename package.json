@@ -37,7 +37,7 @@
     "contributors": "*",
     "cov": "*",
     "istanbul": "*",
-    "mocha": "*",
+    "mocha": "3.4.2",
     "should": "10.0.0",
     "jshint": "2"
   }
