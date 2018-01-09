@@ -293,27 +293,27 @@ exports.array.Class = function (names) {
  * java.Locale("zh_CN");
  * =>
  * {
- *   $class: 'com.caucho.hessian.io.LocaleHandle',
+ *   $class: 'java.util.Locale',
  *   $: { value: 'zh_CN' }
  * }
  */
-exports.Locale = function (locale, handle) {
+exports.Locale = function (locale) {
   var value = locale ? {
     value: locale
   } : null;
-  return combine(handle || 'com.caucho.hessian.io.LocaleHandle', value);
+  return combine('java.util.Locale', value);
 };
 
-exports.array.Locale = function (locales, handle) {
+exports.array.Locale = function (locales) {
   var values = null;
   if (locales) {
     values = [];
     for (var i = 0, len = locales.length; i < len; i++) {
-      values.push(exports.Locale(locales[i], handle));
+      values.push(exports.Locale(locales[i]));
     }
   }
   return {
-    $class: '[' + (handle || 'com.caucho.hessian.io.LocaleHandle'),
+    $class: '[' + ('java.util.Locale'),
     $: values
   };
 };
