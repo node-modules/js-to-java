@@ -246,24 +246,24 @@ describe('js to java', function () {
 
   it('should create Locale with out input `handle`', function () {
     var result = {
-      $class: 'com.caucho.hessian.io.LocaleHandle',
+      $class: 'java.util.Locale',
       $: {value: 'zh_CN'}
     };
     java.Locale('zh_CN').should.eql(result);
     java.revert(result).should.eql({value: 'zh_CN'});
 
     result = {
-      $class: '[com.caucho.hessian.io.LocaleHandle',
+      $class: '[java.util.Locale',
       $: null
     };
     java.array.Locale().should.eql(result);
     should(java.revert(result)).equal(null);
 
     result = {
-      $class: '[com.caucho.hessian.io.LocaleHandle',
+      $class: '[java.util.Locale',
       $: [
         {
-          $class: 'com.caucho.hessian.io.LocaleHandle',
+          $class: 'java.util.Locale',
           $: {
             value: 'zh_CN'
           }
@@ -272,22 +272,6 @@ describe('js to java', function () {
     };
     java.array.Locale(['zh_CN']).should.eql(result);
     java.revert(result).should.eql([{value: 'zh_CN'}]);
-  });
-
-  it('should create Locale with input `handle`', function () {
-    var result = {
-      $class: 'test.com.caucho.hessian.io.LocaleHandle',
-      $: {value: 'zh_CN'}
-    };
-    java.Locale('zh_CN', 'test.com.caucho.hessian.io.LocaleHandle').should.eql(result);
-    java.revert(result).should.eql({value: 'zh_CN'});
-
-    result = {
-      $class: 'com.caucho.hessian.io.LocaleHandle',
-      $: null
-    };
-    java.Locale().should.eql(result);
-    should(java.revert(result)).equal(null);
   });
 
   it('should create BigDecimal', function () {
