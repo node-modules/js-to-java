@@ -1,4 +1,10 @@
 
+2.5.0 / 2018-02-27
+==================
+
+  * feat: 增加 collection (#57)
+  * chore(package): update should to version 10.0.0
+
 2.4.0 / 2016-06-07
 ==================
 
