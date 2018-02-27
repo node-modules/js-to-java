@@ -78,6 +78,7 @@ java.array.int([1, 2, 3]);
   Character: 'java.lang.Character',
   List: 'java.util.List',
   Set: 'java.util.Set',
+  Collection: 'java.util.Collection',
   Iterator: 'java.util.Iterator',
   Enumeration: 'java.util.Enumeration',
   HashMap: 'java.util.HashMap',
