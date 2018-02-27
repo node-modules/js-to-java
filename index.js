@@ -136,6 +136,7 @@ var simpleTypeMap = exports.simpleTypeMap = {
   Character: {name: 'java.lang.Character', valid: string},
   List: {name: 'java.util.List', valid: ignore},
   Set: {name: 'java.util.Set', valid: ignore},
+  Collection: {name: 'java.util.Collection', valid: ignore},
   Iterator: {name: 'java.util.Iterator', valid: ignore},
   Enumeration: {name: 'java.util.Enumeration', valid: ignore},
   HashMap: {name: 'java.util.HashMap', valid: ignore},

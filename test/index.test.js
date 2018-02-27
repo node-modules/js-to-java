@@ -93,6 +93,9 @@ describe('js to java', function () {
     java.Integer('a').should.eql({$class: 'java.lang.Integer', $: 'a'});
     java.revert({$class: 'java.lang.Integer', $: 'a'}).should.equal('a');
 
+    java.Collection([]).should.eql({$class: 'java.util.Collection', $: []});
+    java.revert({$class: 'java.util.Collection', $: []}).should.eql([]);
+
   });
 
   it('should array work fine', function () {
