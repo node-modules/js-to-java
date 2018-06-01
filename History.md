@@ -1,4 +1,13 @@
 
+2.6.0 / 2018-06-01
+==================
+
+**fixes**
+  * [[`8a9a7da`](http://github.com/node-modules/js-to-java/commit/8a9a7da99e90a215c8073d2c2ea4675c99e30d5d)] - fix: add cause prop to exception (#60) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
+**others**
+  * [[`8324a91`](http://github.com/node-modules/js-to-java/commit/8324a91eefb147280ee1eda47bf75445a61de124)] - chore: fix version (#58) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
 2.5.0 / 2018-02-27
 ==================
 
