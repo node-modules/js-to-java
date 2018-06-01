@@ -17,6 +17,8 @@ describe('js error to java exception', function() {
     exception.$.stackTrace.$.forEach(function(ele) {
       assert.equal(ele.$class, 'java.lang.StackTraceElement');
     });
+    assert.equal(exception.$.cause.$class, 'java.lang.Throwable');
+    assert(exception.$.cause.$ === null);
     // console.log(JSON.stringify(exception, null, 2));
   });
 
@@ -29,6 +31,8 @@ describe('js error to java exception', function() {
     exception.$.stackTrace.$.forEach(function(ele) {
       assert.equal(ele.$class, 'java.lang.StackTraceElement');
     });
+    assert.equal(exception.$.cause.$class, 'java.lang.Throwable');
+    assert(exception.$.cause.$ === null);
     // console.log(JSON.stringify(exception, null, 2));
   });
 });
