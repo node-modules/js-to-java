@@ -157,6 +157,7 @@ describe('js to java', function () {
     };
     java.enum('hessian.demo.Color', 'RED').should.eql(result);
     java.enum('hessian.demo.Color', {name: 'RED'}).should.eql(result);
+    java.enum('hessian.demo.Color', {$name: 'RED'}).should.eql(result);
     java.revert(result).should.eql({name: 'RED'});
 
     result = {

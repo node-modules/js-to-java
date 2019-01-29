@@ -225,8 +225,12 @@ exports.enum = function (className, name) {
     value = null;
   } else if (typeof name === 'string') {
     value = {name: name};
-  } else if (typeof name === 'object' && name.name) {
-    value = {name: name.name};
+  } else if (typeof name === 'object' && (name.$name || name.name)) {
+    // java enum class has name() and getName(), user can override property name
+    //   -> $name => name()
+    //   -> name => getName()
+    // Usually two values are equal
+    value = {name: name.$name || name.name};
   } else {
     // Still to return the wrong value, when the error is convenient to find the reasons.
     value = name;
