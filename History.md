@@ -1,4 +1,9 @@
 
+2.6.1 / 2019-01-30
+==================
+
+  * fix: enum default use  https://github.com/alipay/sofa-hessian-node/pull/14 (#63)
+
 2.6.0 / 2018-06-01
 ==================
 
