@@ -156,8 +156,11 @@ describe('js to java', function () {
       $: {name: 'RED'}
     };
     java.enum('hessian.demo.Color', 'RED').should.eql(result);
+    java.Enum('hessian.demo.Color', 'RED').should.eql(result);
     java.enum('hessian.demo.Color', {name: 'RED'}).should.eql(result);
+    java.Enum('hessian.demo.Color', {name: 'RED'}).should.eql(result);
     java.enum('hessian.demo.Color', {$name: 'RED'}).should.eql(result);
+    java.Enum('hessian.demo.Color', {$name: 'RED'}).should.eql(result);
     java.revert(result).should.eql({name: 'RED'});
 
     result = {
@@ -165,6 +168,7 @@ describe('js to java', function () {
       $: null
     };
     java.enum('xxx').should.eql(result);
+    java.Enum('xxx').should.eql(result);
     should(java.revert(result)).equal(null);
 
     result = {
@@ -172,6 +176,7 @@ describe('js to java', function () {
       $: null
     };
     java.array.enum('com.xxx').should.eql(result);
+    java.array.Enum('com.xxx').should.eql(result);
     should(java.revert(result)).equal(null);
 
     result = {
@@ -186,7 +191,9 @@ describe('js to java', function () {
       ]
     };
     java.array.enum('com.xxx', ['aaa']).should.eql(result);
+    java.array.Enum('com.xxx', ['aaa']).should.eql(result);
     java.array.enum('com.xxx', [{name: 'aaa'}]).should.eql(result);
+    java.array.Enum('com.xxx', [{name: 'aaa'}]).should.eql(result);
     java.revert(result).should.eql([{name: 'aaa'}]);
   });
 
