@@ -1,4 +1,10 @@
 
+2.7.0 / 2021-04-25
+==================
+
+**fixes**
+  * [[`19bb555`](http://github.com/node-modules/js-to-java/commit/19bb555118795b964374f10aa6bec9a0f65802fe)] - fix: add Enum for ts (#67) (赵磊鹏 <<872538464@qq.com>>)
+
 2.6.1 / 2019-01-30
 ==================
 
