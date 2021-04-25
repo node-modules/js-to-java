@@ -219,7 +219,7 @@ exports.abstract = function (abstractClassName, className, val) {
  *   $: { name: 'RED' }
  * }
  */
-var Enum = function (className, name) {
+function Enum (className, name) {
   var value;
   if (!name) {
     value = null;
@@ -244,7 +244,7 @@ exports.enum = Enum;
 // enum is key word, this is for TS
 exports.Enum = Enum;
 
-var ArrayEnum = function (className, names) {
+function ArrayEnum (className, names) {
   var values = null;
   if (names) {
     values = [];
