@@ -236,7 +236,7 @@ function Enum (className, name) {
     value = name;
   }
   return combine(className, value);
-};
+}
 
 // backward compatible
 exports.enum = Enum;
@@ -256,7 +256,7 @@ function ArrayEnum (className, names) {
     $class: '[' + className,
     $: values
   };
-};
+}
 
 // backward compatible
 exports.array.enum = ArrayEnum;
