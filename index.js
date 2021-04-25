@@ -219,7 +219,7 @@ exports.abstract = function (abstractClassName, className, val) {
  *   $: { name: 'RED' }
  * }
  */
-exports.enum = function (className, name) {
+function Enum (className, name) {
   var value;
   if (!name) {
     value = null;
@@ -236,9 +236,15 @@ exports.enum = function (className, name) {
     value = name;
   }
   return combine(className, value);
-};
+}
 
-exports.array.enum = function (className, names) {
+// backward compatible
+exports.enum = Enum;
+
+// enum is key word, this is for TS
+exports.Enum = Enum;
+
+function ArrayEnum (className, names) {
   var values = null;
   if (names) {
     values = [];
@@ -250,7 +256,13 @@ exports.array.enum = function (className, names) {
     $class: '[' + className,
     $: values
   };
-};
+}
+
+// backward compatible
+exports.array.enum = ArrayEnum;
+
+// enum is key word, this is for TS
+exports.array.Enum = ArrayEnum;
 
 /**
  * java.Class("java.lang.String");
