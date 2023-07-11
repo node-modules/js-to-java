@@ -1,15 +1,12 @@
-js-to-java
-==========
+# js-to-java
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
+[![CI](https://github.com/node-modules/js-to-java/actions/workflows/nodejs.yml/badge.svg)](https://github.com/node-modules/js-to-java/actions/workflows/nodejs.yml)
 [![Test coverage][cov-image]][cov-url]
 [![npm download][download-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/js-to-java.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/js-to-java
-[travis-image]: https://img.shields.io/travis/node-modules/js-to-java.svg?style=flat-square
-[travis-url]: https://travis-ci.org/node-modules/js-to-java
 [cov-image]: http://codecov.io/github/node-modules/js-to-java/coverage.svg?branch=master
 [cov-url]: http://codecov.io/github/node-modules/js-to-java?branch=master
 [download-image]: https://img.shields.io/npm/dm/js-to-java.svg?style=flat-square
@@ -24,7 +21,7 @@ In [hessian.js](https://github.com/node-modules/hessian.js), we need to write ja
 [![NPM](https://nodei.co/npm/js-to-java.png?downloads=true)](https://nodei.co/npm/js-to-java/)
 
 ```bash
-$ npm install js-to-java
+npm install js-to-java
 ```
 
 ## Usage
@@ -212,4 +209,16 @@ java.revert(data);
 
 ## License
 
-MIT
+[MIT](LICENSE)
+
+<!-- GITCONTRIBUTOR_START -->
+
+## Contributors
+
+|[<img src="https://avatars.githubusercontent.com/u/985607?v=4" width="100px;"/><br/><sub><b>dead-horse</b></sub>](https://github.com/dead-horse)<br/>|[<img src="https://avatars.githubusercontent.com/u/1400114?v=4" width="100px;"/><br/><sub><b>coolme200</b></sub>](https://github.com/coolme200)<br/>|[<img src="https://avatars.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars.githubusercontent.com/u/14790466?v=4" width="100px;"/><br/><sub><b>greenkeeperio-bot</b></sub>](https://github.com/greenkeeperio-bot)<br/>|[<img src="https://avatars.githubusercontent.com/u/456108?v=4" width="100px;"/><br/><sub><b>shaoshuai0102</b></sub>](https://github.com/shaoshuai0102)<br/>|[<img src="https://avatars.githubusercontent.com/u/1207064?v=4" width="100px;"/><br/><sub><b>gxcsoccer</b></sub>](https://github.com/gxcsoccer)<br/>|
+| :---: | :---: | :---: | :---: | :---: | :---: |
+[<img src="https://avatars.githubusercontent.com/u/17831480?v=4" width="100px;"/><br/><sub><b>mytEcust</b></sub>](https://github.com/mytEcust)<br/>|[<img src="https://avatars.githubusercontent.com/u/32174276?v=4" width="100px;"/><br/><sub><b>semantic-release-bot</b></sub>](https://github.com/semantic-release-bot)<br/>|[<img src="https://avatars.githubusercontent.com/u/15973504?v=4" width="100px;"/><br/><sub><b>zhaoleipeng</b></sub>](https://github.com/zhaoleipeng)<br/>
+
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Tue Jul 11 2023 11:39:26 GMT+0800`.
+
+<!-- GITCONTRIBUTOR_END -->

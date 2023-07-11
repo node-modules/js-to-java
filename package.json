@@ -11,7 +11,8 @@
     "test": "mocha -R spec -t 3000 -r should test/*.test.js",
     "test-cov": "nyc mocha -- -t 3000 -r should test/*.test.js",
     "ci": "npm run jshint && npm run test-cov",
-    "jshint": "jshint lib index.js"
+    "jshint": "jshint lib index.js",
+    "contributor": "git-contributor"
   },
   "repository": {
     "type": "git",
@@ -31,8 +32,8 @@
   "homepage": "https://github.com/node-modules/js-to-java",
   "dependencies": {},
   "devDependencies": {
-    "contributors": "*",
     "cov": "*",
+    "git-contributor": "^2.1.5",
     "jshint": "2",
     "mocha": "*",
     "nyc": "^15.1.0",
