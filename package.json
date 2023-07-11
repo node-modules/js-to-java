@@ -9,10 +9,9 @@
   ],
   "scripts": {
     "test": "mocha -R spec -t 3000 -r should test/*.test.js",
-    "test-cov": "istanbul cover _mocha -- -t 3000 -r should test/*.test.js",
+    "test-cov": "nyc mocha -- -t 3000 -r should test/*.test.js",
     "ci": "npm run jshint && npm run test-cov",
-    "jshint": "jshint .",
-    "autod": "autod -w --prefix '~' -t test -e examples"
+    "jshint": "jshint lib index.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +21,6 @@
     "js",
     "java",
     "object",
-    "wraper",
     "class"
   ],
   "author": "dead_horse <dead_horse@qq.com>",
@@ -33,12 +31,11 @@
   "homepage": "https://github.com/node-modules/js-to-java",
   "dependencies": {},
   "devDependencies": {
-    "autod": "*",
     "contributors": "*",
     "cov": "*",
-    "istanbul": "*",
+    "jshint": "2",
     "mocha": "*",
-    "should": "10.0.0",
-    "jshint": "2"
+    "nyc": "^15.1.0",
+    "should": "10.0.0"
   }
 }
