@@ -1,5 +1,7 @@
 'use strict';
 
+var assert = require('assert');
+var vm = require('vm');
 require('should');
 var revert = require('../index').revert;
 
@@ -84,7 +86,6 @@ describe('revert: java to js', function() {
     ];
     revert(java).should.eql(['foo', 'bar', 'zoo']);
   });
-
 
   it('should work when used with cycular reference', function() {
     var java, result;
@@ -181,5 +182,60 @@ describe('revert: java to js', function() {
     result = [{foo: 'bar'}];
     result[1] = result[0];
     revert(java).should.eql(result);
+  });
+
+  it('should work in vm', function() {
+    revert(new vm.Script(`33`).runInNewContext({})).should.equal(33);
+    revert(new vm.Script(`'foo'`).runInNewContext({})).should.equal('foo');
+    revert(new vm.Script(`true`).runInNewContext({})).should.equal(true);
+
+    assert.deepEqual(revert(new vm.Script(`new Boolean(true)`).runInNewContext({})), new Boolean(true));
+    assert.deepEqual(revert(new vm.Script(`new Date('2023-01-01')`).runInNewContext({})), new Date('2023-01-01'));
+    assert.deepEqual(revert(new vm.Script(`new Number(1)`).runInNewContext({})), new Number(1));
+    assert.deepEqual(revert(new vm.Script(`new RegExp(/[12]/)`).runInNewContext({})), new RegExp(/[12]/));
+    assert.deepEqual(revert(new vm.Script(`new String('foo')`).runInNewContext({})), new String('foo'));
+
+    var java = new vm.Script(`[
+      {$class: 'string', $: 'foo'},
+      {$class: 'string', $: 'bar'},
+      {$class: 'string', $: 'zoo'},
+    ]`).runInNewContext({});
+    revert(java).should.eql(['foo', 'bar', 'zoo']);
+
+    var error = new Error();
+    error.message = 'this is a java IOException instance';
+    error.name = 'java.io.IOException';
+    error.cause = error;
+    assert.deepEqual(revert(new vm.Script(`var error = new Error();
+      error.message = 'this is a java IOException instance';
+      error.name = 'java.io.IOException';
+      error.cause = error;
+      var java = {
+        $class: 'java.io.IOException',
+        $: error,
+      };`).runInNewContext({})), error);
+
+    class javaError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'java.io.IOException';
+        this.cause = this;
+      }
+    }
+    var error2 = new javaError('this is a java IOException instance');
+
+    assert.deepEqual(revert(new vm.Script(`class javaError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'java.io.IOException';
+        this.cause = this;
+      }
+    }
+    var error2 = new javaError('this is a java IOException instance');
+    var java = {
+      $class: 'java.io.IOException',
+      $: error2,
+    };
+    java`).runInNewContext({})), error2);
   });
 });
